@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Data_layer.models
 {
-    class Kategorija
+    public class Kategorija
     {
+        public Kategorija(int id, string naziv)
+        {
+            Id_kategorija = id;
+            Naziv = naziv;
+        }
+
         public int Id_kategorija { get; set; }
         public string Naziv { get; set; }
 

@@ -46,16 +46,23 @@
   <ItemGroup>
     <Compile Include="ConnectionString.cs" />
     <Compile Include="JediniceMereRepository.cs" />
+    <Compile Include="KategorijeRepository.cs" />
+    <Compile Include="KoraciRepository.cs" />
     <Compile Include="models\JedinicaMere.cs" />
     <Compile Include="models\Kategorija.cs" />
     <Compile Include="models\Korak.cs" />
     <Compile Include="models\Magacin.cs" />
+    <Compile Include="MagacinRepository.cs" />
     <Compile Include="models\Pozicija.cs" />
     <Compile Include="models\Pravljenje.cs" />
     <Compile Include="models\Proizvod.cs" />
     <Compile Include="models\Radnik.cs" />
     <Compile Include="models\Sastojak.cs" />
+    <Compile Include="PozicijeRepository.cs" />
+    <Compile Include="ProizvodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadniciRepository.cs" />
+    <Compile Include="SastojciRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

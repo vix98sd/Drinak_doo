@@ -10,11 +10,11 @@ namespace Data_layer
 {
     public class JediniceMereRepository
     {
-        string connectionString = ConnectionString.connectionString;
+        //string connectionString = ConnectionString.GetString();
 
         public List<JedinicaMere> GetJediniceMere()
         {
-            using(OracleConnection connection = new OracleConnection(connectionString))
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
             {
                 connection.Open();
                 string sql = "SELECT * FROM JEDINICE_MERE";
