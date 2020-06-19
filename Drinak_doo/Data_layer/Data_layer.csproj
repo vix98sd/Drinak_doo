@@ -59,6 +59,7 @@
     <Compile Include="models\Radnik.cs" />
     <Compile Include="models\Sastojak.cs" />
     <Compile Include="PozicijeRepository.cs" />
+    <Compile Include="PravljenjaRepository.cs" />
     <Compile Include="ProizvodRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadniciRepository.cs" />

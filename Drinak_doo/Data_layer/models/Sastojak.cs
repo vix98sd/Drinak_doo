@@ -16,6 +16,14 @@ namespace Data_layer.models
             SetKategorija(id_kategorija);
         }
 
+        public Sastojak(int id_proizvod, Magacin roba, Kategorija kategorija, double kolicina)
+        {
+            Id_proizvod = id_proizvod;
+            Roba = roba;
+            Kategorija_sastojka = kategorija;
+            Kolicina = kolicina;
+        }
+
         public int Id_proizvod { get; set; }
         public Magacin Roba { get; set; }
         public Kategorija Kategorija_sastojka { get; set; }

@@ -8,6 +8,12 @@ namespace Data_layer.models
 {
     public class Proizvod
     {
+        public Proizvod()
+        {
+            Koraci = new List<Korak>();
+            Sastojci = new List<Sastojak>();
+        }
+
         public Proizvod(int id_proizvod, string naziv, double tezina, double cena, string napomena)
         {
             Id_proizvod = id_proizvod;
@@ -16,6 +22,7 @@ namespace Data_layer.models
             Cena = cena;
             Napomena = napomena;
             SetKoraci();
+            SetSastojci();
         }
 
         public int Id_proizvod { get; set; }
@@ -26,10 +33,14 @@ namespace Data_layer.models
 
         public List<Korak> Koraci { get; set; }
 
+        public List<Sastojak> Sastojci { get; set; }
+
         private void SetKoraci()
         {
             KoraciRepository koraciRepository = new KoraciRepository();
             List<Korak> sviKoraci = koraciRepository.GetKoraci();
+
+            Koraci = new List<Korak>();
 
             foreach(Korak korak in sviKoraci)
             {
@@ -39,6 +50,22 @@ namespace Data_layer.models
                 }
             }
 
+        }
+
+        private void SetSastojci()
+        {
+            SastojciRepository SR = new SastojciRepository();
+            List<Sastojak> sviSastojci = SR.GetSastojke();
+
+            Sastojci = new List<Sastojak>();
+
+            foreach(Sastojak sastojak in sviSastojci)
+            {
+                if(sastojak.Id_proizvod == Id_proizvod)
+                {
+                    Sastojci.Add(sastojak);
+                }
+            }
         }
     }
 }

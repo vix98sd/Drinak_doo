@@ -17,6 +17,15 @@ namespace Data_layer.models
             SetProizvod(id_proizvod);
         }
 
+        public Pravljenje(Radnik radnik, Proizvod proizvod, int rbr_pravljenja, string datum, string napomena)
+        {
+            Napravio = radnik;
+            Napravljen = proizvod;
+            Redni_broj = rbr_pravljenja;
+            Datum = datum;
+            Napomena = napomena;
+        }
+
         public Radnik Napravio { get; set; }
         public Proizvod Napravljen { get; set; }
         public int Redni_broj { get; set; }

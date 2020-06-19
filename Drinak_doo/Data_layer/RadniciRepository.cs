@@ -23,12 +23,93 @@ namespace Data_layer
 
                 while (dr.Read())
                 {
-                    Radnik radnik = new Radnik(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetString(3), dr.GetString(4), dr.GetString(5), dr.GetInt32(6));
+                    Radnik radnik = new Radnik(dr.GetInt32(0),
+                                               dr.GetString(1), 
+                                               dr.GetString(2), 
+                                               dr.GetString(3), 
+                                               dr.GetString(4), 
+                                               dr.GetString(5), 
+                                               dr.GetInt32(6));
                     radnici.Add(radnik);
                 }
 
                 return radnici;
             }
         }
+
+        public string UpdateRadnik(Radnik radnik)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = @"update radnici"
+                            +" set ime=\'"+radnik.Ime
+                            +"\', prezime=\'"+radnik.Prezime
+                            +"\', telefon=\'"+radnik.Telefon
+                            +"\', adresa=\'"+radnik.Adresa
+                            +"\', jmbg=\'"+radnik.Jmbg
+                            +"\', id_pozicija="+radnik.Poz.Id_pozicija
+                            +" where id_radnik=" + radnik.Id_radnik;
+
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno azuriran radnik!";
+                }
+                catch
+                {
+                    return "Azuriranje nije uspelo!";
+                }
+            }
+        }
+
+        public string FunctionRadnik(int id_radnik)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select get_worker_most(" + id_radnik + ") from dual";
+                OracleCommand command = new OracleCommand(sql, connection);
+                try
+                {
+                    OracleDataReader dr = command.ExecuteReader();
+                    dr.Read();
+                    return dr.GetString(0);
+                }
+                catch
+                {
+                    return "Nije uspelo izvrsavanje SQL funkcije!";
+                }
+            }
+        }
+
+        public string ProcedureRadnik(int id_radnik)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "get_worker_level";
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.Add("p_id_radnik", OracleDbType.Int32).Value = id_radnik;
+                command.Parameters.Add("p_level", OracleDbType.Varchar2, 32767).Direction = System.Data.ParameterDirection.Output;
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return command.Parameters["p_level"].Value.ToString();
+                }
+                catch
+                {
+                    return "Nije uspoelo izvrsavanje PL/SQL procedure!";
+                }
+
+            }
+        }
+
     }
 }

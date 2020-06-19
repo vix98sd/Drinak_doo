@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data_layer
 {
-    public public class KoraciRepository
+    public class KoraciRepository
     {
         string connectionString = ConnectionString.GetString();
 
@@ -30,6 +30,73 @@ namespace Data_layer
                 }
 
                 return koraci;
+            }
+        }
+
+        public string UpdateKorak(Korak korak)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "update koraci set opis = \'" + korak.Opis +
+                             "\' where id_proizvod = " + korak.Id_proizvod +
+                             " and redni_broj = " + korak.Redni_broj;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno azuriran korak!";
+                }
+                catch
+                {
+                    return "Greska prilikom azuriranja koraka!";
+                }
+            }
+        }
+
+        public string InsertKorak(Korak korak)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "insert into koraci values(" + korak.Id_proizvod +
+                             "," + korak.Redni_broj +
+                             ", \'" + korak.Opis +
+                             "\')";
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno unet novi korak!";
+                }
+                catch
+                {
+                    return "Greska prilikom unosenja novog koraka!";
+                }
+
+
+            }
+        }
+
+        public string DeleteKorake(int id_proizvod)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "delete from koraci where id_proizvod = " + id_proizvod;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Koraci uspesno obrisani!";
+                }
+                catch
+                {
+                    return "Brisanje koraka nije uspelo!";
+                }
             }
         }
     }

@@ -45,7 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JediniceMereBusiness.cs" />
+    <Compile Include="KategorijeBusiness.cs" />
+    <Compile Include="KoraciBusiness.cs" />
+    <Compile Include="MagacinBusiness.cs" />
+    <Compile Include="PozicijeBusiness.cs" />
+    <Compile Include="PravljenjaBusiness.cs" />
+    <Compile Include="ProizvodiBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadniciBusiness.cs" />
+    <Compile Include="SastojciBusiness.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

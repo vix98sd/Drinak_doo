@@ -19,6 +19,17 @@ namespace Data_layer.models
             SetPoz(id_pozicija);
         }
 
+        public Radnik(int id_radnik, string ime, string prezime, string telefon, string adresa, string jmbg, Pozicija pozicija)
+        {
+            Id_radnik = id_radnik;
+            Ime = ime;
+            Prezime = prezime;
+            Telefon = telefon;
+            Adresa = adresa;
+            Jmbg = jmbg;
+            Poz = pozicija;
+        }
+
         public int Id_radnik { get; set; }
         public string Ime { get; set; }
         public string Prezime { get; set; }
@@ -26,6 +37,9 @@ namespace Data_layer.models
         public string Adresa { get; set; }
         public string Jmbg { get; set; }
         public Pozicija Poz { get; set; }
+
+        public string FunctionString { get; set; }
+        public string ProcedureString { get; set; }
 
         private void SetPoz(int id_pozicija)
         {
@@ -42,5 +56,16 @@ namespace Data_layer.models
             }
         }
 
+        public void DoFunction()
+        {
+            RadniciRepository RR = new RadniciRepository();
+            FunctionString = RR.FunctionRadnik(Id_radnik);
+        }
+
+        public void DoProcedure()
+        {
+            RadniciRepository RR = new RadniciRepository();
+            ProcedureString = RR.ProcedureRadnik(Id_radnik);
+        }
     }
 }
