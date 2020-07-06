@@ -32,5 +32,21 @@ namespace Data_layer
                 return pozicije;
             }
         }
+
+        public Pozicija GetPozicija(int id_pozicija)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from pozicije where id_pozicija = " + id_pozicija;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                dr.Read();
+
+                Pozicija pozicija = new Pozicija(dr.GetInt32(0), dr.GetString(1));
+                return pozicija;
+            }
+        }
     }
 }

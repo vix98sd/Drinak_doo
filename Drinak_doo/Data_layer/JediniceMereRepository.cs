@@ -60,5 +60,20 @@ namespace Data_layer
             return s;*/
         }
 
+        public JedinicaMere GetJedinicaMereByID(int jmid)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from jedinice_mere where id_jm = " + jmid;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                dr.Read();
+
+                JedinicaMere jm = new JedinicaMere(dr.GetInt32(0), dr.GetString(1));
+                return jm;
+            }
+        }
     }
 }

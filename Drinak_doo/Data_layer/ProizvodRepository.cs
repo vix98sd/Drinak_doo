@@ -31,6 +31,26 @@ namespace Data_layer
             }
         }
 
+        public Proizvod GetProizvod(int id_proizvod)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from proizvodi where id_proizvod = " + id_proizvod;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                dr.Read();
+
+                Proizvod proizvod = new Proizvod(dr.GetInt32(0),
+                                                 dr.GetString(1), 
+                                                 dr.GetDouble(2), 
+                                                 dr.GetDouble(3), 
+                                                 dr.GetString(4));
+                return proizvod;
+            }
+        }
+
         public string UpdateProizvod(Proizvod proizvod)
         {
             using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))

@@ -32,6 +32,9 @@ namespace Data_layer.models
         private void SetRoba(int id_roba)
         {
             MagacinRepository MR = new MagacinRepository();
+            Roba = MR.GetMagacinByID(id_roba);
+
+            /*
             List<Magacin> svaRoba = MR.GetMagacin();
 
             foreach(Magacin roba in svaRoba)
@@ -42,11 +45,15 @@ namespace Data_layer.models
                     break;
                 }
             }
+            */
         }
 
         private void SetKategorija(int id_kategorija)
         {
             KategorijeRepository KR = new KategorijeRepository();
+            Kategorija_sastojka = KR.GetKategorijaByID(id_kategorija);
+
+            /*
             List<Kategorija> sveKategorije = KR.GetKategorije();
 
             foreach (Kategorija kategorija in sveKategorije)
@@ -57,6 +64,7 @@ namespace Data_layer.models
                     break;
                 }
             }
+            */
         }
 
     }
