@@ -34,7 +34,12 @@ namespace Data_layer.models
 
         private void SetRadnik(int id_radnik)
         {
+
+
             RadniciRepository RR = new RadniciRepository();
+            Napravio = RR.GetRadnik(id_radnik);
+
+            /*
             List<Radnik> radnici = RR.GetRadnici();
             
             foreach(Radnik radnik in radnici)
@@ -45,11 +50,15 @@ namespace Data_layer.models
                     break;
                 }
             }
+            */
         }
 
         private void SetProizvod(int id_proizvod)
         {
             ProizvodRepository PR = new ProizvodRepository();
+            Napravljen = PR.GetProizvod(id_proizvod);
+
+            /*
             List<Proizvod> proizvodi = PR.GetProizvodi();
 
             foreach(Proizvod proizvod in proizvodi)
@@ -60,6 +69,7 @@ namespace Data_layer.models
                     break;
                 }
             }
+            */
         }
     }
 }

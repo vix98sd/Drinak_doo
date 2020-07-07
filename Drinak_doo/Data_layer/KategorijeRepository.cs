@@ -10,11 +10,11 @@ namespace Data_layer
 {
     public class KategorijeRepository
     {
-        string connectionString = ConnectionString.GetString();
+        //string connectionString = ConnectionString.GetString();
 
         public List<Kategorija> GetKategorije()
         {
-            using(OracleConnection connection = new OracleConnection(connectionString))
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
             {
                 connection.Open();
                 string sql = "select * from kategorije";
@@ -32,6 +32,22 @@ namespace Data_layer
                 return kategorije;
             }
 
+        }
+
+        public Kategorija GetKategorijaByID(int id_kategorija)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from kategorije where id_kategorija = " + id_kategorija;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                dr.Read();
+
+                Kategorija kategorija = new Kategorija(dr.GetInt32(0), dr.GetString(1));
+                return kategorija;
+            }
         }
 
     }

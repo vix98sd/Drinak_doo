@@ -38,6 +38,9 @@ namespace Data_layer.models
         private void SetKoraci()
         {
             KoraciRepository koraciRepository = new KoraciRepository();
+            Koraci = koraciRepository.GetKoraciByProizvod(Id_proizvod);
+
+            /*
             List<Korak> sviKoraci = koraciRepository.GetKoraci();
 
             Koraci = new List<Korak>();
@@ -49,12 +52,15 @@ namespace Data_layer.models
                     Koraci.Add(korak);
                 }
             }
-
+            */
         }
 
         private void SetSastojci()
         {
             SastojciRepository SR = new SastojciRepository();
+            Sastojci = SR.GetSastojkeByProizvod(Id_proizvod);
+
+            /*
             List<Sastojak> sviSastojci = SR.GetSastojke();
 
             Sastojci = new List<Sastojak>();
@@ -66,6 +72,7 @@ namespace Data_layer.models
                     Sastojci.Add(sastojak);
                 }
             }
+            */
         }
     }
 }

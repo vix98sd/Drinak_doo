@@ -33,6 +33,30 @@ namespace Data_layer
             }
         }
 
+        public List<Korak> GetKoraciByProizvod(int id_proizvod)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from koraci where id_proizvod = " + id_proizvod + " order by redni_broj";
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+
+                List<Korak> koraci = new List<Korak>();
+
+                while (dr.Read())
+                {
+                    Korak korak = new Korak(dr.GetInt32(0),
+                                            dr.GetInt32(1),
+                                            dr.GetString(2));
+                    koraci.Add(korak);
+                }
+
+                return koraci;
+            }
+        }
+
         public string UpdateKorak(Korak korak)
         {
             using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))

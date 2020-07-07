@@ -44,6 +44,8 @@ namespace Data_layer.models
         private void SetPoz(int id_pozicija)
         {
             PozicijeRepository PR = new PozicijeRepository();
+            Poz = PR.GetPozicija(id_pozicija);
+            /*
             List<Pozicija> pozicije = PR.GetPozicije();
 
             foreach(Pozicija pozicija in pozicije)
@@ -54,6 +56,7 @@ namespace Data_layer.models
                     break;
                 }
             }
+            */
         }
 
         public void DoFunction()

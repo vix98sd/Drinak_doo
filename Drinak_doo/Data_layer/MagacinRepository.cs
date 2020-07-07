@@ -30,5 +30,25 @@ namespace Data_layer.models
                 return magacin;
             }
         }
+
+        public Magacin GetMagacinByID(int id_robe)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from magacin where id_robe = " + id_robe;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                dr.Read();
+
+                Magacin roba = new Magacin(dr.GetInt32(0),
+                                           dr.GetString(1),
+                                           dr.GetDouble(2),
+                                           dr.GetInt32(3));
+
+                return roba;
+            }
+        }
     }
 }

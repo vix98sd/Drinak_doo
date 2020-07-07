@@ -37,6 +37,29 @@ namespace Data_layer
             }
         }
 
+        public Radnik GetRadnik(int id_radnik)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from radnici where id_radnik = " + id_radnik;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                dr.Read();
+
+                Radnik radnik = new Radnik(dr.GetInt32(0),
+                                           dr.GetString(1), 
+                                           dr.GetString(2), 
+                                           dr.GetString(3), 
+                                           dr.GetString(4), 
+                                           dr.GetString(5), 
+                                           dr.GetInt32(6));
+
+                return radnik;
+            }
+        }
+
         public string UpdateRadnik(Radnik radnik)
         {
             using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))

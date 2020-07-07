@@ -23,6 +23,9 @@ namespace Data_layer.models
         private void SetJM(int jmid)
         {
             JediniceMereRepository JMR = new JediniceMereRepository();
+            Jm = JMR.GetJedinicaMereByID(jmid);
+
+            /*
             List<JedinicaMere> jediniceMere = JMR.GetJediniceMere();
 
             foreach(JedinicaMere jedinicaMere in jediniceMere)
@@ -33,6 +36,7 @@ namespace Data_layer.models
                     break;
                 }
             }
+            */
         }
 
     }

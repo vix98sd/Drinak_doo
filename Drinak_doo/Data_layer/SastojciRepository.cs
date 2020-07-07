@@ -31,6 +31,27 @@ namespace Data_layer
             }
         }
 
+        public List<Sastojak> GetSastojkeByProizvod(int id_proizvod)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from sastojci where id_proizvod = " + id_proizvod + " order by id_kategorija";
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                List<Sastojak> sastojci = new List<Sastojak>();
+
+                while (dr.Read())
+                {
+                    Sastojak sastojak = new Sastojak(dr.GetInt32(0), dr.GetInt32(1), dr.GetInt32(2), dr.GetDouble(3));
+                    sastojci.Add(sastojak);
+                }
+
+                return sastojci;
+            }
+        }
+
         public string InsertSastojak(Sastojak sastojak, string eksplicitnoZadatNaziv)
         {
             using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
