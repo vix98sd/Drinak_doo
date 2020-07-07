@@ -88,6 +88,54 @@ namespace Data_layer
             }
         }
 
+        public string InsertRadnik(Radnik radnik)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "insert into radnici values(" + radnik.Id_radnik +
+                                                      ",\'" + radnik.Ime +
+                                                      "\',\'" + radnik.Prezime +
+                                                      "\',\'" + radnik.Telefon +
+                                                      "\',\'" + radnik.Adresa +
+                                                      "\',\'" + radnik.Jmbg +
+                                                      "\'," + radnik.Poz.Id_pozicija +
+                                                      ")";
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno ste dodali radnika!";
+                }
+                catch
+                {
+                    return "Dodavanje radnika nije uspelo!";
+                }
+
+            }
+        }
+
+        public string DeleteRadnik(int id_radnik)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "delete from radnici where id_radnik = " + id_radnik;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno ste obrisali radnika!";
+                }
+                catch
+                {
+                    return "Doslo je do greske prilikom brisanja radnika!";
+                }
+            }
+        }
+
         public string FunctionRadnik(int id_radnik)
         {
             using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
