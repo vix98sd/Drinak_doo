@@ -10,8 +10,8 @@ namespace Data_layer.models
     {
         public Proizvod()
         {
-            Koraci = new List<Korak>();
-            Sastojci = new List<Sastojak>();
+            koraci = null;
+            sastojci = null;
         }
 
         public Proizvod(int id_proizvod, string naziv, double tezina, double cena, string napomena)
@@ -21,8 +21,8 @@ namespace Data_layer.models
             Tezina = tezina;
             Cena = cena;
             Napomena = napomena;
-            SetKoraci();
-            SetSastojci();
+            koraci = null;
+            sastojci = null;
         }
 
         public int Id_proizvod { get; set; }
@@ -31,14 +31,45 @@ namespace Data_layer.models
         public double Cena { get; set; }
         public string Napomena { get; set; }
 
-        public List<Korak> Koraci { get; set; }
+        private List<Korak> koraci;
+        public void SetKoraci(List<Korak> koraci)
+        {
+            this.koraci = koraci;
 
-        public List<Sastojak> Sastojci { get; set; }
+            if (this.koraci == null)
+                this.koraci = new List<Korak>();
+        }
+        public List<Korak> GetKoraci()
+        {
+            if(koraci == null)
+            {
+                SetKoraci();
+            }
+            return koraci;
+        }
+
+        private List<Sastojak> sastojci;
+        public void SetSastojci(List<Sastojak> sastojci)
+        {
+            this.sastojci = sastojci;
+
+            if(this.sastojci == null)
+                this.sastojci = new List<Sastojak>();
+        }
+
+        public List<Sastojak> GetSastojci()
+        {
+            if(sastojci == null)
+            {
+                SetSastojci();
+            }
+            return sastojci;
+        }
 
         private void SetKoraci()
         {
             KoraciRepository koraciRepository = new KoraciRepository();
-            Koraci = koraciRepository.GetKoraciByProizvod(Id_proizvod);
+            SetKoraci(koraciRepository.GetKoraciByProizvod(Id_proizvod));
 
             /*
             List<Korak> sviKoraci = koraciRepository.GetKoraci();
@@ -58,7 +89,7 @@ namespace Data_layer.models
         private void SetSastojci()
         {
             SastojciRepository SR = new SastojciRepository();
-            Sastojci = SR.GetSastojkeByProizvod(Id_proizvod);
+            SetSastojci(SR.GetSastojkeByProizvod(Id_proizvod));
 
             /*
             List<Sastojak> sviSastojci = SR.GetSastojke();

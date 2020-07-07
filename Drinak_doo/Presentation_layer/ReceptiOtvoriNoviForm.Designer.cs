@@ -48,6 +48,7 @@
             this.lblNaziv = new System.Windows.Forms.Label();
             this.lblNazivHC = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.lblKol = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblSviSastojci
@@ -71,11 +72,11 @@
             // 
             this.lblKolicina.AutoSize = true;
             this.lblKolicina.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKolicina.Location = new System.Drawing.Point(237, 151);
+            this.lblKolicina.Location = new System.Drawing.Point(333, 172);
             this.lblKolicina.Name = "lblKolicina";
-            this.lblKolicina.Size = new System.Drawing.Size(128, 26);
+            this.lblKolicina.Size = new System.Drawing.Size(19, 26);
             this.lblKolicina.TabIndex = 35;
-            this.lblKolicina.Text = "Naziv torte: ";
+            this.lblKolicina.Text = "-";
             // 
             // tbOpisKoraka
             // 
@@ -234,11 +235,22 @@
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // lblKol
+            // 
+            this.lblKol.AutoSize = true;
+            this.lblKol.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKol.Location = new System.Drawing.Point(226, 134);
+            this.lblKol.Name = "lblKol";
+            this.lblKol.Size = new System.Drawing.Size(181, 26);
+            this.lblKol.TabIndex = 70;
+            this.lblKol.Text = "Kolicina sastojka:";
+            // 
             // ReceptiOtvoriNoviForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblKol);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.lblSviSastojci);
             this.Controls.Add(this.lbSviSastojci);
@@ -288,5 +300,6 @@
         private System.Windows.Forms.Label lblNaziv;
         private System.Windows.Forms.Label lblNazivHC;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label lblKol;
     }
 }

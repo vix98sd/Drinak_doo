@@ -13,17 +13,33 @@ namespace Data_layer.models
             Id_robe = id_robe;
             Naziv = naziv;
             Kolicina = kolicina;
-            SetJM(jmid);
+            this.jmid = jmid;
+            jmm = null;
         }
         public int Id_robe { get; set; }
         public string Naziv { get; set; }
         public double Kolicina { get; set; }
+
+        private int jmid;
+        private JedinicaMere jmm;
+        public void SetJM(JedinicaMere JM)
+        {
+            this.jmm = JM;
+        }
+        public JedinicaMere GetJM()
+        {
+            if (this.jmm == null)
+            {
+                SetJM(jmid);
+            }
+            return jmm;
+        }
         public JedinicaMere Jm { get; set; }
 
         private void SetJM(int jmid)
         {
             JediniceMereRepository JMR = new JediniceMereRepository();
-            Jm = JMR.GetJedinicaMereByID(jmid);
+            SetJM(JMR.GetJedinicaMereByID(jmid));
 
             /*
             List<JedinicaMere> jediniceMere = JMR.GetJediniceMere();

@@ -50,7 +50,7 @@ namespace Presentation_layer
                 {
                     if (pravljenje.Datum.Equals(cbDatum.SelectedItem))
                     {
-                        lbNapravljeni.Items.Add(pravljenje.Datum + "- " + pravljenje.Napravljen.Naziv + " - " + pravljenje.Napravio.Ime + " " + pravljenje.Napravio.Prezime);
+                        lbNapravljeni.Items.Add(pravljenje.Datum + "- " + pravljenje.GetNapravljen().Naziv + " - " + pravljenje.GetNapravio().Ime + " " + pravljenje.GetNapravio().Prezime);
                         filtriranaPravljenja.Add(pravljenje);
                     }
                 }
@@ -67,7 +67,7 @@ namespace Presentation_layer
 
             foreach(Pravljenje pravljenje in pravljenja)
             {
-                lbNapravljeni.Items.Add(pravljenje.Datum + "- " + pravljenje.Napravljen.Naziv + " - " + pravljenje.Napravio.Ime + " " + pravljenje.Napravio.Prezime);
+                lbNapravljeni.Items.Add(pravljenje.Datum + "- " + pravljenje.GetNapravljen().Naziv + " - " + pravljenje.GetNapravio().Ime + " " + pravljenje.GetNapravio().Prezime);
                 filtriranaPravljenja.Add(pravljenje);
             }
         }

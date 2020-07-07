@@ -59,8 +59,8 @@ namespace Data_layer
             using( OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
             {
                 connection.Open();
-                string sql = "insert into pravljenje values(" + pravljenje.Napravio.Id_radnik +
-                             "," + pravljenje.Napravljen.Id_proizvod +
+                string sql = "insert into pravljenje values(" + pravljenje.GetNapravio().Id_radnik +
+                             "," + pravljenje.GetNapravljen().Id_proizvod +
                              "," + pravljenje.Redni_broj +
                              ",\'" + pravljenje.Datum +
                              "\',\'" + pravljenje.Napomena +

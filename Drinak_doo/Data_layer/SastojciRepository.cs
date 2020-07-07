@@ -58,8 +58,8 @@ namespace Data_layer
             {
                 connection.Open();
                 string sql = "insert into sastojci values(" + sastojak.Id_proizvod +
-                                                        "," + sastojak.Roba.Id_robe +
-                                                        "," + sastojak.Kategorija_sastojka.Id_kategorija +
+                                                        "," + sastojak.GetRoba().Id_robe +
+                                                        "," + sastojak.GetKategorija().Id_kategorija +
                                                         "," + sastojak.Kolicina +
                                                         ",\'" + eksplicitnoZadatNaziv +  
                                                         "\')";
@@ -84,8 +84,8 @@ namespace Data_layer
                 connection.Open();
                 string sql = "update sastojci set kolicina =" +sastojak.Kolicina+
                     " where id_proizvod =" + sastojak.Id_proizvod+
-                    " and id_robe =" + sastojak.Roba.Id_robe+
-                    " and id_kategorija =" + sastojak.Kategorija_sastojka.Id_kategorija;
+                    " and id_robe =" + sastojak.GetRoba().Id_robe+
+                    " and id_kategorija =" + sastojak.GetKategorija().Id_kategorija;
                 OracleCommand command = new OracleCommand(sql, connection);
 
                 try

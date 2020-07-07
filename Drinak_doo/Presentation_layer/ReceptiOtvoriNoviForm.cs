@@ -37,15 +37,15 @@ namespace Presentation_layer
 
         private void SetSastojci()
         {
-            foreach(Sastojak sastojak in p.Sastojci)
+            foreach(Sastojak sastojak in p.GetSastojci())
             {
-                lbSviSastojci.Items.Add(sastojak.Kategorija_sastojka.Naziv + " - " + sastojak.Roba.Naziv);
+                lbSviSastojci.Items.Add(sastojak.GetKategorija().Naziv + " - " + sastojak.GetRoba().Naziv);
             }
         }
 
         private void SetKoraci()
         {
-            foreach(Korak korak in p.Koraci)
+            foreach(Korak korak in p.GetKoraci())
             {
                 lbKoraci.Items.Add(korak.Redni_broj + ". korak");
             }
@@ -56,16 +56,16 @@ namespace Presentation_layer
             if (lbKoraci.SelectedIndex == -1)
                 return;
 
-            tbOpisKoraka.Text = p.Koraci[lbKoraci.SelectedIndex].Redni_broj + ". korak: " + p.Koraci[lbKoraci.SelectedIndex].Opis;
+            tbOpisKoraka.Text = p.GetKoraci()[lbKoraci.SelectedIndex].Redni_broj + ". korak: " + p.GetKoraci()[lbKoraci.SelectedIndex].Opis;
         }
 
         private void SetKategorije()
         {
-            foreach(Sastojak sastojak in p.Sastojci)
+            foreach(Sastojak sastojak in p.GetSastojci())
             {
-                if (!cbKategorije.Items.Contains(sastojak.Kategorija_sastojka.Naziv))
+                if (!cbKategorije.Items.Contains(sastojak.GetKategorija().Naziv))
                 {
-                    cbKategorije.Items.Add(sastojak.Kategorija_sastojka.Naziv);
+                    cbKategorije.Items.Add(sastojak.GetKategorija().Naziv);
                 }
             }
         }
@@ -78,11 +78,11 @@ namespace Presentation_layer
             sastojciIzKategorije = new List<Sastojak>();
             lbKategorije.Items.Clear();
 
-            foreach(Sastojak sastojak in p.Sastojci)
+            foreach(Sastojak sastojak in p.GetSastojci())
             {
-                if (sastojak.Kategorija_sastojka.Naziv.Equals(cbKategorije.SelectedItem))
+                if (sastojak.GetKategorija().Naziv.Equals(cbKategorije.SelectedItem))
                 {
-                    lbKategorije.Items.Add(sastojak.Roba.Naziv);
+                    lbKategorije.Items.Add(sastojak.GetRoba().Naziv);
                     sastojciIzKategorije.Add(sastojak);
                 }
             }
@@ -94,7 +94,7 @@ namespace Presentation_layer
                 return;
 
             lblKolicina.Text = sastojciIzKategorije[lbKategorije.SelectedIndex].Kolicina.ToString() + " "
-                             + sastojciIzKategorije[lbKategorije.SelectedIndex].Roba.Jm.Naziv;
+                             + sastojciIzKategorije[lbKategorije.SelectedIndex].GetRoba().GetJM().Naziv;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
