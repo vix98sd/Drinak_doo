@@ -44,6 +44,7 @@
             this.btnAzuriraj = new System.Windows.Forms.Button();
             this.lblFunction = new System.Windows.Forms.Label();
             this.lblProcedure = new System.Windows.Forms.Label();
+            this.btnObrisi = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbRadnici
@@ -154,7 +155,7 @@
             // 
             // btnAzuriraj
             // 
-            this.btnAzuriraj.Location = new System.Drawing.Point(420, 409);
+            this.btnAzuriraj.Location = new System.Drawing.Point(420, 377);
             this.btnAzuriraj.Name = "btnAzuriraj";
             this.btnAzuriraj.Size = new System.Drawing.Size(75, 23);
             this.btnAzuriraj.TabIndex = 13;
@@ -180,11 +181,23 @@
             this.lblProcedure.TabIndex = 15;
             this.lblProcedure.Text = "Izaberite radnika da dobijete informacije iz procedure!";
             // 
+            // btnObrisi
+            // 
+            this.btnObrisi.Enabled = false;
+            this.btnObrisi.Location = new System.Drawing.Point(420, 406);
+            this.btnObrisi.Name = "btnObrisi";
+            this.btnObrisi.Size = new System.Drawing.Size(75, 23);
+            this.btnObrisi.TabIndex = 16;
+            this.btnObrisi.Text = "Obrisi";
+            this.btnObrisi.UseVisualStyleBackColor = true;
+            this.btnObrisi.Click += new System.EventHandler(this.btnObrisi_Click);
+            // 
             // RadniciForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(522, 450);
+            this.Controls.Add(this.btnObrisi);
             this.Controls.Add(this.lblProcedure);
             this.Controls.Add(this.lblFunction);
             this.Controls.Add(this.btnAzuriraj);
@@ -226,5 +239,6 @@
         private System.Windows.Forms.Button btnAzuriraj;
         private System.Windows.Forms.Label lblFunction;
         private System.Windows.Forms.Label lblProcedure;
+        private System.Windows.Forms.Button btnObrisi;
     }
 }

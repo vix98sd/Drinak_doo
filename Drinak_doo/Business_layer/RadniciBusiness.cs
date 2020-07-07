@@ -28,5 +28,15 @@ namespace Business_layer
             RadniciRepository RR = new RadniciRepository();
             return RR.UpdateRadnik(radnik);
         }
+
+        public string InsertRadnik(Radnik radnik)
+        {
+            RadniciRepository RR = new RadniciRepository();
+            return RR.InsertRadnik(radnik);
+        }
+        public string DeleteRadnik(int id_radnik)
+        {
+            return new RadniciRepository().DeleteRadnik(id_radnik);
+        }
     }
 }
