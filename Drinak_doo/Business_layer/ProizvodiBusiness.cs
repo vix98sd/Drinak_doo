@@ -25,7 +25,7 @@ namespace Business_layer
 
             foreach(Proizvod proizvod in sviProizvodi)
             {
-                if(proizvod.Koraci != null && proizvod.Sastojci != null)
+                if(proizvod.GetKoraci() != null && proizvod.GetSastojci() != null)
                 {
                     saReceptom.Add(proizvod);
                 }

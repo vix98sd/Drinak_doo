@@ -13,21 +13,57 @@ namespace Data_layer.models
             Redni_broj = rbr_pravljenja;
             Datum = datum;
             Napomena = napomena;
-            SetRadnik(id_radnik);
-            SetProizvod(id_proizvod);
+
+            this.id_radnik = id_radnik;
+            SetNapravio(null);
+            this.id_proizvod = id_proizvod;
+            SetNapravljen(null);
+
+            //SetRadnik(this.id_radnik);
+            //SetProizvod(id_proizvod);
         }
 
         public Pravljenje(Radnik radnik, Proizvod proizvod, int rbr_pravljenja, string datum, string napomena)
         {
-            Napravio = radnik;
-            Napravljen = proizvod;
+            SetNapravio(radnik);
+            SetNapravljen(proizvod);
             Redni_broj = rbr_pravljenja;
             Datum = datum;
             Napomena = napomena;
         }
 
-        public Radnik Napravio { get; set; }
-        public Proizvod Napravljen { get; set; }
+        private int id_radnik;
+        private Radnik napravio;
+        public void SetNapravio(Radnik radnik)
+        {
+            napravio = radnik;
+        }
+        public Radnik GetNapravio()
+        {
+            if(napravio == null)
+            {
+                SetRadnik(id_radnik);
+            }
+
+            return napravio;
+        }
+        
+        private int id_proizvod;
+        private Proizvod napravljen;
+        public void SetNapravljen(Proizvod proizvod)
+        {
+            napravljen = proizvod;
+        }
+        public Proizvod GetNapravljen()
+        {
+            if(napravljen == null)
+            {
+                SetProizvod(id_proizvod);
+            }
+
+            return napravljen;
+        }
+        
         public int Redni_broj { get; set; }
         public string Datum { get; set; }
         public string Napomena { get; set; }
@@ -37,7 +73,7 @@ namespace Data_layer.models
 
 
             RadniciRepository RR = new RadniciRepository();
-            Napravio = RR.GetRadnik(id_radnik);
+            SetNapravio(RR.GetRadnik(id_radnik));
 
             /*
             List<Radnik> radnici = RR.GetRadnici();
@@ -56,7 +92,7 @@ namespace Data_layer.models
         private void SetProizvod(int id_proizvod)
         {
             ProizvodRepository PR = new ProizvodRepository();
-            Napravljen = PR.GetProizvod(id_proizvod);
+            SetNapravljen(PR.GetProizvod(id_proizvod));
 
             /*
             List<Proizvod> proizvodi = PR.GetProizvodi();

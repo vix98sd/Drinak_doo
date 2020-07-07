@@ -54,9 +54,9 @@ namespace Presentation_layer
         private void SetSastojci()
         {
             lbSviSastojci.Items.Clear();
-            foreach (Sastojak sastojak in p.Sastojci)
+            foreach (Sastojak sastojak in p.GetSastojci())
             {
-                lbSviSastojci.Items.Add(sastojak.Kategorija_sastojka.Naziv + " - " + sastojak.Roba.Naziv);
+                lbSviSastojci.Items.Add(sastojak.GetKategorija().Naziv + " - " + sastojak.GetRoba().Naziv);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Presentation_layer
         private void SetKoraci()
         {
             lbKoraci.Items.Clear();
-            foreach (Korak korak in p.Koraci)
+            foreach (Korak korak in p.GetKoraci())
             {
                 lbKoraci.Items.Add(korak.Redni_broj + ". korak");
             }
@@ -85,18 +85,18 @@ namespace Presentation_layer
             if (lbKoraci.SelectedIndex == -1)
                 return;
 
-            tbOpisKoraka.Text = p.Koraci[lbKoraci.SelectedIndex].Opis;
+            tbOpisKoraka.Text = p.GetKoraci()[lbKoraci.SelectedIndex].Opis;
         }
 
         private void SetKategorije()
         {
             cbKategorije.Items.Clear();
 
-            foreach (Sastojak sastojak in p.Sastojci)
+            foreach (Sastojak sastojak in p.GetSastojci())
             {
-                if (!cbKategorije.Items.Contains(sastojak.Kategorija_sastojka.Naziv))
+                if (!cbKategorije.Items.Contains(sastojak.GetKategorija().Naziv))
                 {
-                    cbKategorije.Items.Add(sastojak.Kategorija_sastojka.Naziv);
+                    cbKategorije.Items.Add(sastojak.GetKategorija().Naziv);
                 }
             }
         }
@@ -109,11 +109,11 @@ namespace Presentation_layer
             sastojciIzKategorije = new List<Sastojak>();
             lbKategorije.Items.Clear();
 
-            foreach (Sastojak sastojak in p.Sastojci)
+            foreach (Sastojak sastojak in p.GetSastojci())
             {
-                if (sastojak.Kategorija_sastojka.Naziv.Equals(cbKategorije.SelectedItem))
+                if (sastojak.GetKategorija().Naziv.Equals(cbKategorije.SelectedItem))
                 {
-                    lbKategorije.Items.Add(sastojak.Roba.Naziv);
+                    lbKategorije.Items.Add(sastojak.GetRoba().Naziv);
                     sastojciIzKategorije.Add(sastojak);
                 }
             }
@@ -135,8 +135,8 @@ namespace Presentation_layer
                 return;
             }
 
-            noviKorak = new Korak(p.Id_proizvod, p.Koraci.Count + 1, "");
-            p.Koraci.Add(noviKorak);
+            noviKorak = new Korak(p.Id_proizvod, p.GetKoraci().Count + 1, "");
+            p.GetKoraci().Add(noviKorak);
             SetKoraci();
             lbKoraci.SetSelected(lbKoraci.Items.Count-1, true);
         }
@@ -151,15 +151,15 @@ namespace Presentation_layer
 
             KoraciBusiness KB = new KoraciBusiness();
 
-            if (p.Koraci[lbKoraci.SelectedIndex].Opis.Equals(""))
+            if (p.GetKoraci()[lbKoraci.SelectedIndex].Opis.Equals(""))
             {
                 noviKorak.Opis = tbOpisKoraka.Text;
                 MessageBox.Show(KB.InsertKorak(noviKorak));
             }
             else
             {
-                p.Koraci[lbKoraci.SelectedIndex].Opis = tbOpisKoraka.Text;
-                MessageBox.Show(KB.UpdateKorak(p.Koraci[lbKoraci.SelectedIndex]));
+                p.GetKoraci()[lbKoraci.SelectedIndex].Opis = tbOpisKoraka.Text;
+                MessageBox.Show(KB.UpdateKorak(p.GetKoraci()[lbKoraci.SelectedIndex]));
             }
 
         }
@@ -182,10 +182,10 @@ namespace Presentation_layer
                 MessageBox.Show("Pre dodavanja morate izabrati sastojak i kategoriju, te upisati kolicinu!");
                 return;
             }
-            foreach(Sastojak sastojak in p.Sastojci)
+            foreach(Sastojak sastojak in p.GetSastojci())
             {
-                if (sastojak.Roba.Naziv.Equals(magacin[cbNoviSastojak.SelectedIndex].Naziv) 
-                    && sastojak.Kategorija_sastojka.Naziv.Equals(kategorije[cbNovaKategorija.SelectedIndex].Naziv))
+                if (sastojak.GetRoba().Naziv.Equals(magacin[cbNoviSastojak.SelectedIndex].Naziv) 
+                    && sastojak.GetKategorija().Naziv.Equals(kategorije[cbNovaKategorija.SelectedIndex].Naziv))
                 {
                     MessageBox.Show("Ovaj sastojak vec postoji u ovoj kategoriji, proverite!");
                     return;
@@ -198,7 +198,7 @@ namespace Presentation_layer
                                                            kategorije[cbNovaKategorija.SelectedIndex].Id_kategorija,
                                                            Convert.ToDouble(tbNoviSastojakKolicina.Text));
             MessageBox.Show(SB.InsertSastojak( noviSastojak, tbTriggerName.Text));
-            p.Sastojci.Add(noviSastojak);
+            p.GetSastojci().Add(noviSastojak);
 
             SetKategorije();
             SetSastojci();
@@ -214,16 +214,16 @@ namespace Presentation_layer
 
             SastojciBusiness SB = new SastojciBusiness();
             Sastojak azuriraniSastojak = new Sastojak(p.Id_proizvod,
-                                                           sastojciIzKategorije[lbKategorije.SelectedIndex].Roba,
-                                                           sastojciIzKategorije[lbKategorije.SelectedIndex].Kategorija_sastojka,
+                                                           sastojciIzKategorije[lbKategorije.SelectedIndex].GetRoba(),
+                                                           sastojciIzKategorije[lbKategorije.SelectedIndex].GetKategorija(),
                                                            Convert.ToDouble(tbKolicinaSastojka.Text));
             MessageBox.Show(SB.UpdateSastojak(azuriraniSastojak));
 
-            foreach(Sastojak sastojak in p.Sastojci)
+            foreach(Sastojak sastojak in p.GetSastojci())
             {
                 if(sastojak.Id_proizvod == azuriraniSastojak.Id_proizvod 
-                    && sastojak.Roba.Id_robe == azuriraniSastojak.Roba.Id_robe 
-                    && sastojak.Kategorija_sastojka.Id_kategorija == azuriraniSastojak.Kategorija_sastojka.Id_kategorija)
+                    && sastojak.GetRoba().Id_robe == azuriraniSastojak.GetRoba().Id_robe 
+                    && sastojak.GetKategorija().Id_kategorija == azuriraniSastojak.GetKategorija().Id_kategorija)
                 {
                     sastojak.Kolicina = azuriraniSastojak.Kolicina;
                 }

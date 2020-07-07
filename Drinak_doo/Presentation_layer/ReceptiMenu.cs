@@ -42,7 +42,7 @@ namespace Presentation_layer
                 return;
             }
 
-            if (proizvodi[lbProizvodi.SelectedIndex].Koraci.Count != 0 || proizvodi[lbProizvodi.SelectedIndex].Sastojci.Count != 0)
+            if (proizvodi[lbProizvodi.SelectedIndex].GetKoraci().Count != 0 || proizvodi[lbProizvodi.SelectedIndex].GetSastojci().Count != 0)
             {
                 MessageBox.Show("Za ovaj proizvod vec postoji recept!");
                 return;
@@ -63,7 +63,7 @@ namespace Presentation_layer
                 return;
             }
 
-            if(proizvodi[lbProizvodi.SelectedIndex].Koraci.Count == 0 && proizvodi[lbProizvodi.SelectedIndex].Sastojci.Count == 0)
+            if(proizvodi[lbProizvodi.SelectedIndex].GetKoraci().Count == 0 && proizvodi[lbProizvodi.SelectedIndex].GetSastojci().Count == 0)
             {
                 MessageBox.Show("Ovaj proizvod nema sastavljen recept!");
                 return;
@@ -83,7 +83,7 @@ namespace Presentation_layer
                 return;
             }
 
-            if (proizvodi[lbProizvodi.SelectedIndex].Koraci.Count == 0 && proizvodi[lbProizvodi.SelectedIndex].Sastojci.Count == 0)
+            if (proizvodi[lbProizvodi.SelectedIndex].GetKoraci().Count == 0 && proizvodi[lbProizvodi.SelectedIndex].GetSastojci().Count == 0)
             {
                 MessageBox.Show("Ovaj proizvod nema sastavljen recept!");
                 return;

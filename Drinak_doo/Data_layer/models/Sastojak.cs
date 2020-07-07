@@ -12,27 +12,57 @@ namespace Data_layer.models
         {
             Id_proizvod = id_proizvod;
             Kolicina = kolicina;
-            SetRoba(id_roba);
-            SetKategorija(id_kategorija);
+            this.id_roba = id_roba;
+            roba = null;
+            this.id_kategorija = id_kategorija;
+            kategorija = null;
         }
 
         public Sastojak(int id_proizvod, Magacin roba, Kategorija kategorija, double kolicina)
         {
             Id_proizvod = id_proizvod;
-            Roba = roba;
-            Kategorija_sastojka = kategorija;
+            SetRoba(roba);
+            SetKategorija(kategorija);
             Kolicina = kolicina;
         }
 
         public int Id_proizvod { get; set; }
-        public Magacin Roba { get; set; }
-        public Kategorija Kategorija_sastojka { get; set; }
+
+        private int id_roba;
+        private Magacin roba;
+        public void SetRoba(Magacin roba)
+        {
+            this.roba = roba;
+        }
+        public Magacin GetRoba()
+        {
+            if (roba == null)
+                SetRoba(id_roba);
+
+            return roba;
+        }
+
+        private int id_kategorija;
+        private Kategorija kategorija;
+        public void SetKategorija(Kategorija kategorija)
+        {
+            this.kategorija = kategorija;
+        }
+        public Kategorija GetKategorija()
+        {
+            if(kategorija == null)
+            {
+                SetKategorija(id_kategorija);
+            }
+            return kategorija;
+        }
+        
         public double Kolicina { get; set; }
 
         private void SetRoba(int id_roba)
         {
             MagacinRepository MR = new MagacinRepository();
-            Roba = MR.GetMagacinByID(id_roba);
+            SetRoba(MR.GetMagacinByID(id_roba));
 
             /*
             List<Magacin> svaRoba = MR.GetMagacin();
@@ -51,7 +81,7 @@ namespace Data_layer.models
         private void SetKategorija(int id_kategorija)
         {
             KategorijeRepository KR = new KategorijeRepository();
-            Kategorija_sastojka = KR.GetKategorijaByID(id_kategorija);
+            SetKategorija(KR.GetKategorijaByID(id_kategorija));
 
             /*
             List<Kategorija> sveKategorije = KR.GetKategorije();

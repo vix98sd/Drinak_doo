@@ -64,7 +64,7 @@ namespace Presentation_layer
 
             foreach(Pravljenje pravljenje in pravljenja)
             {
-                if(pravljenje.Napravio.Id_radnik == id_radnik && pravljenje.Napravljen.Id_proizvod == id_proizvod && pravljenje.Datum.Trim().Equals(date))
+                if(pravljenje.GetNapravio().Id_radnik == id_radnik && pravljenje.GetNapravljen().Id_proizvod == id_proizvod && pravljenje.Datum.Trim().Equals(date))
                 {
                     brojac++;
                 }
