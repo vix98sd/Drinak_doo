@@ -86,7 +86,7 @@ namespace Data_layer
 
         public string InsertPravljenje(Pravljenje pravljenje)
         {
-            using( OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
             {
                 connection.Open();
                 string sql = "insert into pravljenje values(" + pravljenje.GetNapravio().Id_radnik +
