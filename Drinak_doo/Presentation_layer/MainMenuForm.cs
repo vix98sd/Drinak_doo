@@ -18,6 +18,7 @@ namespace Presentation_layer
         {
             InitializeComponent();
             this.radnik = radnik;
+            SetHierarchy();
         }
 
         private void btnSviRadnici_Click(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace Presentation_layer
 
         private void btnProizvodi_Click(object sender, EventArgs e)
         {
-            Form napravljeniProizvodi = new NapravljeniProizvodi();
+            Form napravljeniProizvodi = new NapravljeniProizvodi(radnik);
             this.Hide();
             napravljeniProizvodi.ShowDialog();
             this.Show();
@@ -58,6 +59,18 @@ namespace Presentation_layer
             this.Hide();
             napraviProizvod.ShowDialog();
             this.Show();
+        }
+
+        private void SetHierarchy()
+        {
+            if(!radnik.Poz.Naziv.Equals("Vlasnik") && !radnik.Poz.Naziv.Equals("Manager"))
+            {
+                btnSviRadnici.Enabled = false;
+                btnSviRadnici.Visible = false;
+
+                btnNoviProizvod.Enabled = false;
+                btnNoviProizvod.Visible = false;
+            }
         }
     }
 }
