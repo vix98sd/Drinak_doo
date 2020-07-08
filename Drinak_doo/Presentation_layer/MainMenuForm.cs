@@ -1,4 +1,5 @@
-﻿using Data_layer.models;
+﻿using Business_layer;
+using Data_layer.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace Presentation_layer
         {
             InitializeComponent();
             this.radnik = radnik;
+            SetHierarchy();
+            SetContent();
         }
 
         private void btnSviRadnici_Click(object sender, EventArgs e)
@@ -30,7 +33,7 @@ namespace Presentation_layer
 
         private void btnProizvodi_Click(object sender, EventArgs e)
         {
-            Form napravljeniProizvodi = new NapravljeniProizvodi();
+            Form napravljeniProizvodi = new NapravljeniProizvodi(radnik);
             this.Hide();
             napravljeniProizvodi.ShowDialog();
             this.Show();
@@ -38,7 +41,7 @@ namespace Presentation_layer
 
         private void btnRecepti_Click(object sender, EventArgs e)
         {
-            Form receptiMenu = new ReceptiMenu();
+            Form receptiMenu = new ReceptiMenu(radnik);
             this.Hide();
             receptiMenu.ShowDialog();
             this.Show();
@@ -58,6 +61,24 @@ namespace Presentation_layer
             this.Hide();
             napraviProizvod.ShowDialog();
             this.Show();
+        }
+
+        private void SetHierarchy()
+        {
+            if(new RadniciBusiness().IsNotManager(radnik))
+            {
+                btnSviRadnici.Enabled = false;
+                btnSviRadnici.Visible = false;
+
+                btnNoviProizvod.Enabled = false;
+                btnNoviProizvod.Visible = false;
+            }
+        }
+
+        private void SetContent()
+        {
+            lblIme.Text = radnik.Ime + " " + radnik.Prezime;
+            lblPozicija.Text = "- " + radnik.Poz.Naziv;
         }
     }
 }

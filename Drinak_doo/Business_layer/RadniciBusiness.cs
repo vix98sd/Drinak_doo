@@ -38,5 +38,14 @@ namespace Business_layer
         {
             return new RadniciRepository().DeleteRadnik(id_radnik);
         }
+        public bool IsManager(Radnik radnik)
+        {
+            return (radnik.Poz.Naziv.Equals("Vlasnik") || radnik.Poz.Naziv.Equals("Manager"));
+        }
+
+        public bool IsNotManager(Radnik radnik)
+        {
+            return !IsManager(radnik);
+        }
     }
 }

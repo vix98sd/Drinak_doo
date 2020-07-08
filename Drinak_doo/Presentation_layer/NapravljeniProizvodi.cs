@@ -17,16 +17,25 @@ namespace Presentation_layer
         List<String> datumi;
         List<Pravljenje> pravljenja;
         List<Pravljenje> filtriranaPravljenja;
+        Radnik radnik;
 
-        public NapravljeniProizvodi()
+        public NapravljeniProizvodi(Radnik radnik)
         {
             InitializeComponent();
+            this.radnik = radnik;
             SetDatume();
             SetPravljenja();
         }
 
         private void SetDatume()
         {
+            if(!radnik.Poz.Naziv.Equals("Vlasnik") && !radnik.Poz.Naziv.Equals("Manager") && !radnik.Poz.Naziv.Equals("Sef smene"))
+            {
+                cbDatum.Items.Clear();
+                cbDatum.Items.Add(DateTime.Now.ToString("dd-MMM-yy"));
+                return;
+            }
+
             PravljenjaBusiness PB = new PravljenjaBusiness();
             datumi = PB.GetDatume();
 
@@ -40,8 +49,16 @@ namespace Presentation_layer
         {
             if (cbDatum.SelectedItem.Equals("Svi"))
             {
-                SetPravljenja();
-            }else if(cbDatum.SelectedIndex != -1)
+                lbNapravljeni.Items.Clear();
+                filtriranaPravljenja = new List<Pravljenje>();
+
+                foreach(Pravljenje pravljenje in pravljenja)
+                {
+                    lbNapravljeni.Items.Add(pravljenje.Datum + " - " + pravljenje.GetNapravljen().Naziv + " - " + pravljenje.GetNapravio().Ime + " " + pravljenje.GetNapravio().Prezime);
+                    filtriranaPravljenja.Add(pravljenje);
+                }
+            }
+            else if(cbDatum.SelectedIndex != -1)
             {
                 lbNapravljeni.Items.Clear();
                 filtriranaPravljenja = new List<Pravljenje>();
@@ -50,7 +67,7 @@ namespace Presentation_layer
                 {
                     if (pravljenje.Datum.Equals(cbDatum.SelectedItem))
                     {
-                        lbNapravljeni.Items.Add(pravljenje.Datum + "- " + pravljenje.GetNapravljen().Naziv + " - " + pravljenje.GetNapravio().Ime + " " + pravljenje.GetNapravio().Prezime);
+                        lbNapravljeni.Items.Add(pravljenje.Datum + " - " + pravljenje.GetNapravljen().Naziv + " - " + pravljenje.GetNapravio().Ime + " " + pravljenje.GetNapravio().Prezime);
                         filtriranaPravljenja.Add(pravljenje);
                     }
                 }
@@ -62,15 +79,9 @@ namespace Presentation_layer
             PravljenjaBusiness PB = new PravljenjaBusiness();
             pravljenja = PB.GetPravljenja();
 
-            lbNapravljeni.Items.Clear();
-            filtriranaPravljenja = new List<Pravljenje>();
-
-            foreach(Pravljenje pravljenje in pravljenja)
-            {
-                lbNapravljeni.Items.Add(pravljenje.Datum + "- " + pravljenje.GetNapravljen().Naziv + " - " + pravljenje.GetNapravio().Ime + " " + pravljenje.GetNapravio().Prezime);
-                filtriranaPravljenja.Add(pravljenje);
-            }
+            cbDatum.SelectedIndex = 0;
         }
+        
 
         private void lbNapravljeni_SelectedIndexChanged(object sender, EventArgs e)
         {

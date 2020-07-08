@@ -14,11 +14,24 @@ namespace Presentation_layer
 {
     public partial class ReceptiMenu : Form
     {
+        Radnik radnik;
         List<Proizvod> proizvodi;
-        public ReceptiMenu()
+        public ReceptiMenu(Radnik radnik)
         {
             InitializeComponent();
+            this.radnik = radnik;
+            SetForm();
             SetProizvode();
+        }
+
+        public void SetForm()
+        {
+            if(new RadniciBusiness().IsNotManager(radnik))
+            {
+                btnObrisi.Enabled = false;
+                btnObrisiProizvod.Enabled = false;
+                btnNovi.Enabled = false;
+            }
         }
 
         public void SetProizvode()
@@ -69,7 +82,7 @@ namespace Presentation_layer
                 return;
             }
 
-            Form otvoriRecept = new ReceptiOtvoriNoviForm(proizvodi[lbProizvodi.SelectedIndex]);
+            Form otvoriRecept = new ReceptiOtvoriNoviForm(proizvodi[lbProizvodi.SelectedIndex], radnik);
             this.Hide();
             otvoriRecept.ShowDialog();
             this.Show();
