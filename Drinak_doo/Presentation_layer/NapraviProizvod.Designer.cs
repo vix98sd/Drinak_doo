@@ -33,6 +33,7 @@
             this.tbNapomena = new System.Windows.Forms.TextBox();
             this.lblNapomena = new System.Windows.Forms.Label();
             this.btnNapravi = new System.Windows.Forms.Button();
+            this.btnRecept = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbProizvodi
@@ -71,7 +72,7 @@
             // 
             // btnNapravi
             // 
-            this.btnNapravi.Location = new System.Drawing.Point(313, 300);
+            this.btnNapravi.Location = new System.Drawing.Point(276, 281);
             this.btnNapravi.Name = "btnNapravi";
             this.btnNapravi.Size = new System.Drawing.Size(120, 23);
             this.btnNapravi.TabIndex = 7;
@@ -79,11 +80,22 @@
             this.btnNapravi.UseVisualStyleBackColor = true;
             this.btnNapravi.Click += new System.EventHandler(this.btnNapravi_Click);
             // 
+            // btnRecept
+            // 
+            this.btnRecept.Location = new System.Drawing.Point(276, 29);
+            this.btnRecept.Name = "btnRecept";
+            this.btnRecept.Size = new System.Drawing.Size(120, 23);
+            this.btnRecept.TabIndex = 8;
+            this.btnRecept.Text = "Pogledaj recept";
+            this.btnRecept.UseVisualStyleBackColor = true;
+            this.btnRecept.Click += new System.EventHandler(this.btnRecept_Click);
+            // 
             // NapraviProizvod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(474, 377);
+            this.ClientSize = new System.Drawing.Size(409, 317);
+            this.Controls.Add(this.btnRecept);
             this.Controls.Add(this.btnNapravi);
             this.Controls.Add(this.tbNapomena);
             this.Controls.Add(this.lblNapomena);
@@ -103,5 +115,6 @@
         private System.Windows.Forms.TextBox tbNapomena;
         private System.Windows.Forms.Label lblNapomena;
         private System.Windows.Forms.Button btnNapravi;
+        private System.Windows.Forms.Button btnRecept;
     }
 }

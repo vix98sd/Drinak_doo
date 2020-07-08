@@ -24,11 +24,41 @@ namespace Data_layer
                 while (dr.Read())
                 {
                     string datum = dr.GetDateTime(3).ToString().Trim();
-                    Pravljenje pravljenje = new Pravljenje(dr.GetInt32(0), dr.GetInt32(1), dr.GetInt32(2), datum.Replace(" 00:00:00",""), dr.GetString(4));
+                    Pravljenje pravljenje = new Pravljenje(dr.GetInt32(0), 
+                                                           dr.GetInt32(1),
+                                                           dr.GetInt32(2),
+                                                           datum.Replace(" 00:00:00",""),
+                                                           dr.GetString(4));
                     pravljenja.Add(pravljenje);
                 }
 
                 return pravljenja;
+            }
+        }
+
+        public List<Pravljenje> GetPravljenjaNaDan(int id_radnik, int id_proizvod, string date)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "select * from pravljenje where id_radnik = " + id_radnik + " and id_proizvod = " + id_proizvod + " and datum = \'" + date + "\'";
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                OracleDataReader dr = command.ExecuteReader();
+                List<Pravljenje> pravljenjaNaDan = new List<Pravljenje>();
+
+                while (dr.Read())
+                {
+                    string datum = dr.GetDateTime(3).ToString().Trim();
+                    Pravljenje pravljenje = new Pravljenje(dr.GetInt32(0),
+                                                           dr.GetInt32(1),
+                                                           dr.GetInt32(2),
+                                                           datum.Replace(" 00:00:00", ""),
+                                                           dr.GetString(4));
+                    pravljenjaNaDan.Add(pravljenje);
+                }
+
+                return pravljenjaNaDan;
             }
         }
 
@@ -67,15 +97,15 @@ namespace Data_layer
                              "\')";
                 OracleCommand command = new OracleCommand(sql, connection);
 
-                //try
-                //{
+                try
+                {
                     command.ExecuteNonQuery();
                     return "Uspesno ste napravili proizvod!";
-                //}
-                //catch
-                //{
+                }
+                catch
+                {
                     return "Pravljenje proizvoda nije uspelo!";
-                //}
+                }
             }
         }
     }

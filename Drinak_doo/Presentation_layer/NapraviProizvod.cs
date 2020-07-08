@@ -53,24 +53,32 @@ namespace Presentation_layer
             int rbr = GetRbr(radnik.Id_radnik, proizvodi[cbProizvodi.SelectedIndex].Id_proizvod, DateTime.Now.ToString("dd-MMM-yy"));
 
             MessageBox.Show(PB.InsertPravljenje(new Pravljenje(radnik, proizvodi[cbProizvodi.SelectedIndex], rbr, DateTime.Now.ToString("dd-MMM-yy"), napomena)));
+
+            this.Close();
         }
 
         public int GetRbr(int id_radnik, int id_proizvod, string date)
         {
-            int brojac = 0;
+            return new PravljenjaBusiness().GetTodaysRbr(id_radnik, id_proizvod, date);
+        }
 
-            PravljenjaBusiness PB = new PravljenjaBusiness();
-            List<Pravljenje> pravljenja = PB.GetPravljenja();
-
-            foreach(Pravljenje pravljenje in pravljenja)
+        private void btnRecept_Click(object sender, EventArgs e)
+        {
+            if(cbProizvodi.SelectedIndex == -1)
             {
-                if(pravljenje.GetNapravio().Id_radnik == id_radnik && pravljenje.GetNapravljen().Id_proizvod == id_proizvod && pravljenje.Datum.Trim().Equals(date))
-                {
-                    brojac++;
-                }
+                MessageBox.Show("Prvo izaberite proizvod!");
+                return;
             }
 
-            return brojac+1;
+            if(proizvodi[cbProizvodi.SelectedIndex].GetKoraci().Count == 0 && proizvodi[cbProizvodi.SelectedIndex].GetSastojci().Count == 0)
+            {
+                MessageBox.Show("Ovaj proizvod nema sastavljen recept!");
+                return;
+            }
+
+            Form otvoriRecept = new ReceptiOtvoriNoviForm(proizvodi[cbProizvodi.SelectedIndex]);
+
+            otvoriRecept.ShowDialog();
         }
     }
 }

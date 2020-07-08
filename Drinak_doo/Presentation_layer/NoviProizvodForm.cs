@@ -33,6 +33,8 @@ namespace Presentation_layer
             ProizvodiBusiness PB = new ProizvodiBusiness();
             Proizvod proizvod = new Proizvod(PB.FreeID(), tbNaziv.Text, Convert.ToDouble(tbTezina.Text), Convert.ToDouble(tbCena.Text), tbNapomena.Text);
             MessageBox.Show(PB.InsertProizvod(proizvod));
+
+            this.Close();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Data_layer
             using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
             {
                 connection.Open();
-                string sql = "select * from proizvodi";
+                string sql = "select * from proizvodi order by id_proizvod";
                 OracleCommand command = new OracleCommand(sql, connection);
                 OracleDataReader dr = command.ExecuteReader();
 
@@ -96,6 +96,26 @@ namespace Data_layer
                 catch
                 {
                     return "Doslo je do greske prilikom unosa novog proizvoda!";
+                }
+            }
+        }
+
+        public string DeleteProizvod(int id_proizvod)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "delete from proizvodi where id_proizvod = " + id_proizvod;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno ste obrisali proizvod!";
+                }
+                catch
+                {
+                    return "Doslo je do greske prilikom brisanja proizvoda!";
                 }
             }
         }

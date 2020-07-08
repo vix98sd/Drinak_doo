@@ -27,5 +27,18 @@ namespace Business_layer
             PravljenjaRepository PR = new PravljenjaRepository();
             return PR.InsertPravljenje(pravljenje);
         }
+
+        public int GetTodaysRbr(int id_radnik, int id_proizvod, string date)
+        {
+            List<Pravljenje> pravljenjaNaDan = new PravljenjaRepository().GetPravljenjaNaDan(id_radnik, id_proizvod, date);
+            int brojac = 0;
+
+            foreach(Pravljenje pravljenje in pravljenjaNaDan)
+            {
+                brojac++;
+            }
+
+            return brojac + 1;
+        }
     }
 }

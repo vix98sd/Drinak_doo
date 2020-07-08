@@ -59,5 +59,23 @@ namespace Business_layer
 
             return id+1;
         }
+        
+        public string DeleteProizvod(int id_proizvod)
+        {
+            return new ProizvodRepository().DeleteProizvod(id_proizvod);
+        }
+
+        public string DeleteRecept(int id_proizvod)
+        {
+            if(new KoraciBusiness().DeleteKorake(id_proizvod).Equals("Uspesno obrisani koraci!") &&
+               new SastojciBusiness().DeleteSastojke(id_proizvod).Equals("Uspesno obrisani sastojci!"))
+            {
+                return "Uspesno obrisan recept!";
+            }
+            else
+            {
+                return "Nije uspelo brisanje recepta!";
+            }
+        }
     }
 }

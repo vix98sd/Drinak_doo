@@ -33,6 +33,7 @@
             this.btnOtvori = new System.Windows.Forms.Button();
             this.btnNovi = new System.Windows.Forms.Button();
             this.btnObrisi = new System.Windows.Forms.Button();
+            this.btnObrisiProizvod = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbProizvodi
@@ -82,11 +83,22 @@
             this.btnObrisi.UseVisualStyleBackColor = true;
             this.btnObrisi.Click += new System.EventHandler(this.btnObrisi_Click);
             // 
+            // btnObrisiProizvod
+            // 
+            this.btnObrisiProizvod.Location = new System.Drawing.Point(12, 415);
+            this.btnObrisiProizvod.Name = "btnObrisiProizvod";
+            this.btnObrisiProizvod.Size = new System.Drawing.Size(78, 23);
+            this.btnObrisiProizvod.TabIndex = 5;
+            this.btnObrisiProizvod.Text = "Obrisi proizvod";
+            this.btnObrisiProizvod.UseVisualStyleBackColor = true;
+            this.btnObrisiProizvod.Click += new System.EventHandler(this.btnObrisiProizvod_Click);
+            // 
             // ReceptiMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 450);
+            this.Controls.Add(this.btnObrisiProizvod);
             this.Controls.Add(this.btnObrisi);
             this.Controls.Add(this.btnNovi);
             this.Controls.Add(this.btnOtvori);
@@ -106,5 +118,6 @@
         private System.Windows.Forms.Button btnOtvori;
         private System.Windows.Forms.Button btnNovi;
         private System.Windows.Forms.Button btnObrisi;
+        private System.Windows.Forms.Button btnObrisiProizvod;
     }
 }

@@ -115,7 +115,7 @@ namespace Data_layer
                 try
                 {
                     command.ExecuteNonQuery();
-                    return "Koraci uspesno obrisani!";
+                    return "Uspesno obrisani koraci!";
                 }
                 catch
                 {

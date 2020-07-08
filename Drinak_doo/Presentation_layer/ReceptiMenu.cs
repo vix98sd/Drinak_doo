@@ -89,11 +89,46 @@ namespace Presentation_layer
                 return;
             }
 
-            SastojciBusiness SB = new SastojciBusiness();
-            MessageBox.Show(SB.DeleteSastojke(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod));
 
-            KoraciBusiness KB = new KoraciBusiness();
-            MessageBox.Show(KB.DeleteKorake(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod));
+            MessageBox.Show(
+                                new ProizvodiBusiness().DeleteRecept(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod)
+                            );
+
+            SetProizvode();
+        }
+
+        private void btnObrisiProizvod_Click(object sender, EventArgs e)
+        {
+            if(lbProizvodi.SelectedIndex == -1)
+            {
+                MessageBox.Show("Prvo izaberite proizvod!");
+                return;
+            }
+
+            if(proizvodi[lbProizvodi.SelectedIndex].GetKoraci().Count == 0 && proizvodi[lbProizvodi.SelectedIndex].GetSastojci().Count == 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj proizvod?\nProizvod jos NEMA unet recept!", "Potvrda", MessageBoxButtons.YesNo);
+
+                if(dialogResult == DialogResult.Yes)
+                {
+                    MessageBox.Show(
+                                        new ProizvodiBusiness().DeleteProizvod(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod)
+                                    );
+                }
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj proizvod?\nProizvod vec IMA unet recept!", "Potvrda", MessageBoxButtons.YesNo);
+
+                if(dialogResult == DialogResult.Yes)
+                {
+                    MessageBox.Show(
+                                        new KoraciBusiness().DeleteKorake(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod) + "\n" +
+                                        new SastojciBusiness().DeleteSastojke(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod) + "\n" +
+                                        new ProizvodiBusiness().DeleteProizvod(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod)
+                                    );
+                }
+            }
 
             SetProizvode();
         }
