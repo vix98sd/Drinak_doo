@@ -20,6 +20,7 @@ namespace Presentation_layer
             InitializeComponent();
             this.radnik = radnik;
             SetHierarchy();
+            SetContent();
         }
 
         private void btnSviRadnici_Click(object sender, EventArgs e)
@@ -72,6 +73,12 @@ namespace Presentation_layer
                 btnNoviProizvod.Enabled = false;
                 btnNoviProizvod.Visible = false;
             }
+        }
+
+        private void SetContent()
+        {
+            lblIme.Text = radnik.Ime + " " + radnik.Prezime;
+            lblPozicija.Text = "- " + radnik.Poz.Naziv;
         }
     }
 }
