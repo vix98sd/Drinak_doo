@@ -1,4 +1,5 @@
-﻿using Data_layer.models;
+﻿using Business_layer;
+using Data_layer.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +40,7 @@ namespace Presentation_layer
 
         private void btnRecepti_Click(object sender, EventArgs e)
         {
-            Form receptiMenu = new ReceptiMenu();
+            Form receptiMenu = new ReceptiMenu(radnik);
             this.Hide();
             receptiMenu.ShowDialog();
             this.Show();
@@ -63,7 +64,7 @@ namespace Presentation_layer
 
         private void SetHierarchy()
         {
-            if(!radnik.Poz.Naziv.Equals("Vlasnik") && !radnik.Poz.Naziv.Equals("Manager"))
+            if(new RadniciBusiness().IsNotManager(radnik))
             {
                 btnSviRadnici.Enabled = false;
                 btnSviRadnici.Visible = false;

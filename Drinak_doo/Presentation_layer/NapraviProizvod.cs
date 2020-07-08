@@ -76,7 +76,7 @@ namespace Presentation_layer
                 return;
             }
 
-            Form otvoriRecept = new ReceptiOtvoriNoviForm(proizvodi[cbProizvodi.SelectedIndex]);
+            Form otvoriRecept = new ReceptiOtvoriNoviForm(proizvodi[cbProizvodi.SelectedIndex], radnik);
 
             otvoriRecept.ShowDialog();
         }

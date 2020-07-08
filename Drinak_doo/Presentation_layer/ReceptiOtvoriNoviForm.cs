@@ -15,16 +15,22 @@ namespace Presentation_layer
     public partial class ReceptiOtvoriNoviForm : Form
     {
         Proizvod p;
+        Radnik radnik;
         List<Sastojak> sastojciIzKategorije;
-        public ReceptiOtvoriNoviForm(Proizvod proizvod)
+        public ReceptiOtvoriNoviForm(Proizvod proizvod, Radnik radnik)
         {
             InitializeComponent();
             p = proizvod;
+            this.radnik = radnik;
             SetUpAll();
         }
 
         private void SetUpAll()
         {
+            if(new RadniciBusiness().IsNotManager(radnik))
+            {
+                btnEdit.Enabled = false;
+            }
             lblNaziv.Text = p.Naziv;
             lblTezina.Text = p.Tezina.ToString() + "gr";
             lblCena.Text = p.Cena.ToString();
