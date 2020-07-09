@@ -15,5 +15,35 @@ namespace Business_layer
             MagacinRepository MR = new MagacinRepository();
             return MR.GetMagacin();
         }
+
+        public string UpdateMagacin(Magacin roba)
+        {
+            return new MagacinRepository().UpdateMagacin(roba);
+        }
+
+        public string InsertRobu(Magacin roba)
+        {
+            roba.Id_robe = FreeID();
+            return new MagacinRepository().InsertRobu(roba);
+        }
+
+        public string DeleteRobu(Magacin roba)
+        {
+            return new MagacinRepository().DeleteRobu(roba);
+        }
+
+        public int FreeID()
+        {
+            List<Magacin> roba = GetRobu();
+            int id = -1;
+
+            foreach(Magacin r in roba)
+            {
+                if (r.Id_robe > id)
+                    id = r.Id_robe;
+            }
+
+            return id + 1;
+        }
     }
 }

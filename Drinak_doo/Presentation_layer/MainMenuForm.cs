@@ -73,6 +73,9 @@ namespace Presentation_layer
 
                 btnNoviProizvod.Enabled = false;
                 btnNoviProizvod.Visible = false;
+
+                btnMagacin.Enabled = false;
+                btnMagacin.Visible = false;
             }
         }
 
@@ -86,6 +89,14 @@ namespace Presentation_layer
         {
             lblDatum.Text = DateTime.Now.ToString("dd-MMM-yy");
             lblVreme.Text = DateTime.Now.ToString("hh:mm:ss");
+        }
+
+        private void btnMagacin_Click(object sender, EventArgs e)
+        {
+            Form magacin = new MagacinForm();
+            this.Hide();
+            magacin.ShowDialog();
+            this.Show();
         }
     }
 }

@@ -41,6 +41,7 @@
             this.lblDatum = new System.Windows.Forms.Label();
             this.lblVreme = new System.Windows.Forms.Label();
             this.timerDT = new System.Windows.Forms.Timer(this.components);
+            this.btnMagacin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSviRadnici
@@ -158,11 +159,22 @@
             this.timerDT.Interval = 1000;
             this.timerDT.Tick += new System.EventHandler(this.timerDT_Tick);
             // 
+            // btnMagacin
+            // 
+            this.btnMagacin.Location = new System.Drawing.Point(145, 341);
+            this.btnMagacin.Name = "btnMagacin";
+            this.btnMagacin.Size = new System.Drawing.Size(155, 23);
+            this.btnMagacin.TabIndex = 11;
+            this.btnMagacin.Text = "Magacin";
+            this.btnMagacin.UseVisualStyleBackColor = true;
+            this.btnMagacin.Click += new System.EventHandler(this.btnMagacin_Click);
+            // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 450);
+            this.Controls.Add(this.btnMagacin);
             this.Controls.Add(this.lblVreme);
             this.Controls.Add(this.lblDatum);
             this.Controls.Add(this.lblOwner);
@@ -195,5 +207,6 @@
         private System.Windows.Forms.Label lblDatum;
         private System.Windows.Forms.Label lblVreme;
         private System.Windows.Forms.Timer timerDT;
+        private System.Windows.Forms.Button btnMagacin;
     }
 }

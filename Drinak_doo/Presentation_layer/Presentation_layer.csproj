@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MagacinForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MagacinForm.Designer.cs">
+      <DependentUpon>MagacinForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     <Compile Include="ReceptiOtvoriNoviForm.Designer.cs">
       <DependentUpon>ReceptiOtvoriNoviForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="MagacinForm.resx">
+      <DependentUpon>MagacinForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LogInForm.resx">
       <DependentUpon>LogInForm.cs</DependentUpon>
     </EmbeddedResource>
