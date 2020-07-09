@@ -21,6 +21,7 @@ namespace Presentation_layer
             this.radnik = radnik;
             SetHierarchy();
             SetContent();
+            timerDT.Start();
         }
 
         private void btnSviRadnici_Click(object sender, EventArgs e)
@@ -79,6 +80,12 @@ namespace Presentation_layer
         {
             lblIme.Text = radnik.Ime + " " + radnik.Prezime;
             lblPozicija.Text = "- " + radnik.Poz.Naziv;
+        }
+
+        private void timerDT_Tick(object sender, EventArgs e)
+        {
+            lblDatum.Text = DateTime.Now.ToString("dd-MMM-yy");
+            lblVreme.Text = DateTime.Now.ToString("hh:mm:ss");
         }
     }
 }

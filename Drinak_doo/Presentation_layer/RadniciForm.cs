@@ -51,6 +51,9 @@ namespace Presentation_layer
 
         private void lbRadnici_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbRadnici.SelectedIndex == -1)
+                return;
+
             if(!lbRadnici.SelectedItem.Equals("Dodaj novog radnika!"))
             {
                 btnObrisi.Enabled = true;
