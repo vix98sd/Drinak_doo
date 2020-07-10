@@ -75,6 +75,25 @@ namespace Data_layer.models
             }
         }
 
+        public string UpdateMagacin(string sql)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno skinuta kolicina sa stanja!";
+                }
+                catch
+                {
+                    return "Doslo je do greske prilikom skidanja kolicine sa stanja!";
+                }
+            }
+        }
+
         public string InsertRobu(Magacin roba)
         {
             using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))

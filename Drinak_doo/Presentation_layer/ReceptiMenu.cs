@@ -118,29 +118,13 @@ namespace Presentation_layer
                 return;
             }
 
-            if(proizvodi[lbProizvodi.SelectedIndex].GetKoraci().Count == 0 && proizvodi[lbProizvodi.SelectedIndex].GetSastojci().Count == 0)
-            {
-                DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj proizvod?\nProizvod jos NEMA unet recept!", "Potvrda", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj proizvod?\nSva pravljenja ce takodje biti obrisana!", "Potvrda", MessageBoxButtons.YesNo);
 
-                if(dialogResult == DialogResult.Yes)
-                {
-                    MessageBox.Show(
-                                        new ProizvodiBusiness().DeleteProizvod(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod)
-                                    );
-                }
-            }
-            else
+            if(dialogResult == DialogResult.Yes)
             {
-                DialogResult dialogResult = MessageBox.Show("Da li ste sigurni da zelite da obrisete ovaj proizvod?\nProizvod vec IMA unet recept!", "Potvrda", MessageBoxButtons.YesNo);
-
-                if(dialogResult == DialogResult.Yes)
-                {
-                    MessageBox.Show(
-                                        new KoraciBusiness().DeleteKorake(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod) + "\n" +
-                                        new SastojciBusiness().DeleteSastojke(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod) + "\n" +
-                                        new ProizvodiBusiness().DeleteProizvod(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod)
-                                    );
-                }
+                MessageBox.Show(
+                                    new ProizvodiBusiness().DeleteProizvod(proizvodi[lbProizvodi.SelectedIndex].Id_proizvod)
+                                );
             }
 
             SetProizvode();

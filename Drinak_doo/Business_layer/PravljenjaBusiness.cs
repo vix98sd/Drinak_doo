@@ -25,7 +25,21 @@ namespace Business_layer
         public string InsertPravljenje(Pravljenje pravljenje)
         {
             PravljenjaRepository PR = new PravljenjaRepository();
+
+            string sql = "begin ";
+            foreach(Sastojak sastojak in pravljenje.GetNapravljen().GetSastojci())
+            {
+                sql += "update magacin set kolicina = kolicina - " + sastojak.Kolicina + " where id_robe = " + sastojak.GetRoba().Id_robe + "; ";
+            }
+            sql += "end;";
+
+            new MagacinBusiness().UpdateMagacin(sql);
             return PR.InsertPravljenje(pravljenje);
+        }
+
+        public string DeletePravljenja(int id_proizvod)
+        {
+            return new PravljenjaRepository().DeletePravljenja(id_proizvod);
         }
 
         public int GetTodaysRbr(int id_radnik, int id_proizvod, string date)

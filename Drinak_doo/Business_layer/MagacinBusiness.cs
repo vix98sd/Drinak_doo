@@ -32,6 +32,11 @@ namespace Business_layer
             return new MagacinRepository().DeleteRobu(roba);
         }
 
+        public string UpdateMagacin(string sql)
+        {
+            return new MagacinRepository().UpdateMagacin(sql);
+        }
+
         public int FreeID()
         {
             List<Magacin> roba = GetRobu();
