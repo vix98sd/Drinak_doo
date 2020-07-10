@@ -21,6 +21,7 @@ namespace Presentation_layer
             this.radnik = radnik;
             SetHierarchy();
             SetContent();
+            timerDT.Start();
         }
 
         private void btnSviRadnici_Click(object sender, EventArgs e)
@@ -72,6 +73,9 @@ namespace Presentation_layer
 
                 btnNoviProizvod.Enabled = false;
                 btnNoviProizvod.Visible = false;
+
+                btnMagacin.Enabled = false;
+                btnMagacin.Visible = false;
             }
         }
 
@@ -79,6 +83,20 @@ namespace Presentation_layer
         {
             lblIme.Text = radnik.Ime + " " + radnik.Prezime;
             lblPozicija.Text = "- " + radnik.Poz.Naziv;
+        }
+
+        private void timerDT_Tick(object sender, EventArgs e)
+        {
+            lblDatum.Text = DateTime.Now.ToString("dd-MMM-yy");
+            lblVreme.Text = DateTime.Now.ToString("hh:mm:ss");
+        }
+
+        private void btnMagacin_Click(object sender, EventArgs e)
+        {
+            Form magacin = new MagacinForm();
+            this.Hide();
+            magacin.ShowDialog();
+            this.Show();
         }
     }
 }

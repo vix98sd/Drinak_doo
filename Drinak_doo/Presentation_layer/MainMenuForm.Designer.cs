@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSviRadnici = new System.Windows.Forms.Button();
             this.btnProizvodi = new System.Windows.Forms.Button();
             this.btnNapravi = new System.Windows.Forms.Button();
@@ -37,6 +38,10 @@
             this.lblPozicija = new System.Windows.Forms.Label();
             this.lblCompany = new System.Windows.Forms.Label();
             this.lblOwner = new System.Windows.Forms.Label();
+            this.lblDatum = new System.Windows.Forms.Label();
+            this.lblVreme = new System.Windows.Forms.Label();
+            this.timerDT = new System.Windows.Forms.Timer(this.components);
+            this.btnMagacin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSviRadnici
@@ -129,11 +134,49 @@
             this.lblOwner.TabIndex = 8;
             this.lblOwner.Text = "- Drinak doo -";
             // 
+            // lblDatum
+            // 
+            this.lblDatum.AutoSize = true;
+            this.lblDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDatum.Location = new System.Drawing.Point(349, 392);
+            this.lblDatum.Name = "lblDatum";
+            this.lblDatum.Size = new System.Drawing.Size(90, 20);
+            this.lblDatum.TabIndex = 9;
+            this.lblDatum.Text = "01-Jan-20";
+            // 
+            // lblVreme
+            // 
+            this.lblVreme.AutoSize = true;
+            this.lblVreme.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVreme.Location = new System.Drawing.Point(347, 412);
+            this.lblVreme.Name = "lblVreme";
+            this.lblVreme.Size = new System.Drawing.Size(104, 26);
+            this.lblVreme.TabIndex = 10;
+            this.lblVreme.Text = "00:00:00";
+            // 
+            // timerDT
+            // 
+            this.timerDT.Interval = 1000;
+            this.timerDT.Tick += new System.EventHandler(this.timerDT_Tick);
+            // 
+            // btnMagacin
+            // 
+            this.btnMagacin.Location = new System.Drawing.Point(145, 341);
+            this.btnMagacin.Name = "btnMagacin";
+            this.btnMagacin.Size = new System.Drawing.Size(155, 23);
+            this.btnMagacin.TabIndex = 11;
+            this.btnMagacin.Text = "Magacin";
+            this.btnMagacin.UseVisualStyleBackColor = true;
+            this.btnMagacin.Click += new System.EventHandler(this.btnMagacin_Click);
+            // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(474, 450);
+            this.Controls.Add(this.btnMagacin);
+            this.Controls.Add(this.lblVreme);
+            this.Controls.Add(this.lblDatum);
             this.Controls.Add(this.lblOwner);
             this.Controls.Add(this.lblCompany);
             this.Controls.Add(this.lblPozicija);
@@ -161,5 +204,9 @@
         private System.Windows.Forms.Label lblPozicija;
         private System.Windows.Forms.Label lblCompany;
         private System.Windows.Forms.Label lblOwner;
+        private System.Windows.Forms.Label lblDatum;
+        private System.Windows.Forms.Label lblVreme;
+        private System.Windows.Forms.Timer timerDT;
+        private System.Windows.Forms.Button btnMagacin;
     }
 }

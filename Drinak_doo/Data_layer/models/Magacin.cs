@@ -14,27 +14,26 @@ namespace Data_layer.models
             Naziv = naziv;
             Kolicina = kolicina;
             this.jmid = jmid;
-            jmm = null;
+            jm = null;
         }
         public int Id_robe { get; set; }
         public string Naziv { get; set; }
         public double Kolicina { get; set; }
 
         private int jmid;
-        private JedinicaMere jmm;
+        private JedinicaMere jm;
         public void SetJM(JedinicaMere JM)
         {
-            this.jmm = JM;
+            this.jm = JM;
         }
         public JedinicaMere GetJM()
         {
-            if (this.jmm == null)
+            if (this.jm == null)
             {
                 SetJM(jmid);
             }
-            return jmm;
+            return jm;
         }
-        public JedinicaMere Jm { get; set; }
 
         private void SetJM(int jmid)
         {

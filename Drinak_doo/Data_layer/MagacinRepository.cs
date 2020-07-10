@@ -50,5 +50,73 @@ namespace Data_layer.models
                 return roba;
             }
         }
+
+        public string UpdateMagacin(Magacin roba)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "update magacin set" +
+                             " naziv = \'" + roba.Naziv + "\'" +
+                             ", kolicina = " + roba.Kolicina +
+                             ", id_jm = " + roba.GetJM().Id_jm +
+                             "where id_robe = " + roba.Id_robe;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno ste azurirali stanje u magacinu!";
+                }
+                catch
+                {
+                    return "Doslo je do greske prilikom azuriranja stanja u magacinu!";
+                }
+            }
+        }
+
+        public string InsertRobu(Magacin roba)
+        {
+            using (OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "insert into magacin values(" + roba.Id_robe +
+                                                         ",\'" + roba.Naziv + "\'" +
+                                                         "," + roba.Kolicina +
+                                                         "," + roba.GetJM().Id_jm +")";
+
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno uneta roba!";
+                }
+                catch
+                {
+                    return "Doslo je do greske prilikom unosenja robe!";
+                }
+            }
+        }
+
+        public string DeleteRobu(Magacin roba)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "delete from magacin where id_robe = " + roba.Id_robe;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno ste obrisali " + roba.Naziv;
+                }
+                catch
+                {
+                    return "Dolso je do greske prilikom brisanja " + roba.Naziv;
+                }
+            }
+        }
     }
 }
