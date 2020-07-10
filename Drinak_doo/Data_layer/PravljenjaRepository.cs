@@ -84,6 +84,26 @@ namespace Data_layer
             }
         }
 
+        public string DeletePravljenja(int id_proizvod)
+        {
+            using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))
+            {
+                connection.Open();
+                string sql = "delete from pravljenje where id_proizvod = " + id_proizvod;
+                OracleCommand command = new OracleCommand(sql, connection);
+
+                try
+                {
+                    command.ExecuteNonQuery();
+                    return "Uspesno obrisana pravljenja!";
+                }
+                catch
+                {
+                    return "Doslo je do greske prilikom brisanja pravljenja!";
+                }
+            }
+        }
+
         public string InsertPravljenje(Pravljenje pravljenje)
         {
             using(OracleConnection connection = new OracleConnection(ConnectionString.GetString()))

@@ -62,6 +62,8 @@ namespace Business_layer
         
         public string DeleteProizvod(int id_proizvod)
         {
+            new PravljenjaBusiness().DeletePravljenja(id_proizvod);
+            DeleteRecept(id_proizvod);
             return new ProizvodRepository().DeleteProizvod(id_proizvod);
         }
 
