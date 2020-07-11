@@ -79,5 +79,10 @@ namespace Business_layer
                 return "Nije uspelo brisanje recepta!";
             }
         }
+
+        public bool ShowReceptPDF(Proizvod proizvod)
+        {
+            return new ProizvodRepository().ShowReceptPDF(proizvod);
+        }
     }
 }

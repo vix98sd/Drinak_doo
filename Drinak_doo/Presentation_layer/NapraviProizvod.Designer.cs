@@ -34,6 +34,7 @@
             this.lblNapomena = new System.Windows.Forms.Label();
             this.btnNapravi = new System.Windows.Forms.Button();
             this.btnRecept = new System.Windows.Forms.Button();
+            this.btnPDF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbProizvodi
@@ -90,11 +91,22 @@
             this.btnRecept.UseVisualStyleBackColor = true;
             this.btnRecept.Click += new System.EventHandler(this.btnRecept_Click);
             // 
+            // btnPDF
+            // 
+            this.btnPDF.Location = new System.Drawing.Point(276, 58);
+            this.btnPDF.Name = "btnPDF";
+            this.btnPDF.Size = new System.Drawing.Size(120, 23);
+            this.btnPDF.TabIndex = 9;
+            this.btnPDF.Text = "Prikazi PDF recept";
+            this.btnPDF.UseVisualStyleBackColor = true;
+            this.btnPDF.Click += new System.EventHandler(this.btnPDF_Click);
+            // 
             // NapraviProizvod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 317);
+            this.Controls.Add(this.btnPDF);
             this.Controls.Add(this.btnRecept);
             this.Controls.Add(this.btnNapravi);
             this.Controls.Add(this.tbNapomena);
@@ -116,5 +128,6 @@
         private System.Windows.Forms.Label lblNapomena;
         private System.Windows.Forms.Button btnNapravi;
         private System.Windows.Forms.Button btnRecept;
+        private System.Windows.Forms.Button btnPDF;
     }
 }

@@ -1,9 +1,14 @@
 ﻿using Data_layer.models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Data_layer
@@ -116,6 +121,53 @@ namespace Data_layer
                 catch
                 {
                     return "Doslo je do greske prilikom brisanja proizvoda!";
+                }
+            }
+        }
+
+        public bool ShowReceptPDF(Proizvod proizvod)
+        {
+            using (iTextSharp.text.Document doc = new iTextSharp.text.Document(PageSize.A4))
+            {
+                try
+                {
+                    string fileName = proizvod.Naziv.Replace(" ", "_") + "_recept.pdf";
+                    PdfWriter.GetInstance(doc, new FileStream(fileName, FileMode.Create));
+                    doc.Open();
+                    string recept = "OSNOVNI PODACI:\n" +
+                                    "Naziv: " + proizvod.Naziv + "\n" +
+                                    "Tezina: " + proizvod.Tezina + "\n" +
+                                    "Cena: " + proizvod.Cena + "\n" +
+                                    "Napomena: " + proizvod.Napomena + "\n\n\n" +
+                                    "SASTOJCI:\n";
+
+                    int i = 1;
+                    foreach(Sastojak sastojak in proizvod.GetSastojci())
+                    {
+                        recept += i + ". " + sastojak.GetKategorija().Naziv + " - " + sastojak.GetRoba().Naziv + " -> " + sastojak.Kolicina + "\n";
+                        i++;
+                    }
+
+                    recept += "\n\n\nKORACI:\n";
+                    foreach(Korak korak in proizvod.GetKoraci())
+                    {
+                        recept += korak.Redni_broj + ". korak: " + korak.Opis + "\n";
+                    }
+
+                    iTextSharp.text.Paragraph p = new iTextSharp.text.Paragraph("RECEPT");
+                    p.Alignment = Element.ALIGN_CENTER;
+                    doc.Add(p);
+
+                    doc.Add(new iTextSharp.text.Paragraph(50, " "));
+                    doc.Add(new iTextSharp.text.Paragraph(recept));
+                    string path = Directory.GetCurrentDirectory() + "\\" + fileName;
+                    Process.Start(path);
+                    
+                    return false;
+                }
+                catch
+                {
+                    return true;
                 }
             }
         }
