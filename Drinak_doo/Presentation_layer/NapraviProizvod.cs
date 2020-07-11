@@ -80,5 +80,25 @@ namespace Presentation_layer
 
             otvoriRecept.ShowDialog();
         }
+
+        private void btnPDF_Click(object sender, EventArgs e)
+        {
+            if(cbProizvodi.SelectedIndex == -1)
+            {
+                MessageBox.Show("Prvo izaberite proizvod!");
+                return;
+            }
+
+            if(proizvodi[cbProizvodi.SelectedIndex].GetKoraci().Count == 0 && proizvodi[cbProizvodi.SelectedIndex].GetSastojci().Count == 0)
+            {
+                MessageBox.Show("Ovaj proizvod nema sastavljen recept!");
+                return;
+            }
+
+            if (new ProizvodiBusiness().ShowReceptPDF(proizvodi[cbProizvodi.SelectedIndex]))
+            {
+                MessageBox.Show("Doslo je do greske prilikom kreiranja PDFa!");
+            }
+        }
     }
 }
