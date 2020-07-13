@@ -4,4 +4,4 @@ Ovaj projekat predstavlja aplikaciju čija je namena da predstavi funkcionalnost
 
 
 Potpunu dokumentaciju o ovom projektu možete pogledati na sledećem linku:
-  https://drive.google.com/file/d/1FKD5IQ88yK4vl0KxwxYjexEIUwx33x9W/view
+->  https://drive.google.com/file/d/1FKD5IQ88yK4vl0KxwxYjexEIUwx33x9W/view
